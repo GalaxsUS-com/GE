@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GalaxsUS - ჭკვიანი გადაწყვეტილებები</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #000000;
+            --dark: #0A0A0A;
+            --neon-pink: #FF10F0;
+            --neon-pink-light: rgba(255, 16, 240, 0.3);
+            --white: #FFFFFF;
+            --gray: #1E1E1E;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to bottom, var(--black), var(--dark));
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px var(--neon-pink-light);
+            border: 3px solid var(--neon-pink);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--neon-pink-light), transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--neon-pink);
+        }
+
+        .logo-container img {
+            width: 70%;
+            height: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin: 10px 0;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        header h3 {
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            font-weight: 400;
+        }
+
+        header h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .content-block, .feature-block {
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            background: rgba(10, 10, 10, 0.8);
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(255, 16, 240, 0.1);
+            border: 1px solid var(--gray);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-block::before, .feature-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--neon-pink-light), transparent);
+            transition: 0.5s;
+        }
+
+        .content-block:hover::before, .feature-block:hover::before {
+            left: 100%;
+        }
+
+        .content-block:hover, .feature-block:hover {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink-light);
+        }
+
+        .content-block p {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: var(--neon-pink);
+            margin-bottom: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        h4::before {
+            content: '>';
+            margin-right: 15px;
+            color: var(--neon-pink);
+            font-weight: bold;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin: 15px 0;
+            font-size: 1.1rem;
+            position: relative;
+            padding-left: 30px;
+            line-height: 1.7;
+        }
+
+        ul li::before {
+            content: '■';
+            position: absolute;
+            left: 0;
+            color: var(--neon-pink);
+            font-size: 1rem;
+            line-height: 1;
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        aside {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--white);
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 800px;
+            text-align: center;
+            border-left: 4px solid var(--neon-pink);
+            background: rgba(255, 16, 240, 0.05);
+            border-radius: 0 5px 5px 0;
+            box-shadow: 0 0 15px rgba(255, 16, 240, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: var(--dark);
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        footer a {
+            color: var(--neon-pink);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        footer a:hover {
+            color: var(--white);
+            background: var(--neon-pink-light);
+            box-shadow: 0 0 10px var(--neon-pink-light);
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        /* Button styles */
+        .action-button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 20px auto;
+            background-color: transparent;
+            color: var(--neon-pink);
+            border: 2px solid var(--neon-pink);
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 0 0 15px var(--neon-pink-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-button:hover {
+            background-color: var(--neon-pink-light);
+            color: var(--white);
+            box-shadow: 0 0 25px var(--neon-pink);
+            transform: translateY(-3px);
+        }
+
+        .action-button:active {
+            transform: translateY(0);
+        }
+
+        .action-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .action-button:hover::before {
+            left: 100%;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 40px auto;
+        }
+
+        @media (max-width: 768px) {
+            header h2 {
+                font-size: 1.8rem;
+            }
+            
+            header h3 {
+                font-size: 1.3rem;
+            }
+            
+            .content-block, .feature-block {
+                padding: 20px;
+                margin: 20px 15px;
+            }
+
+            .action-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Glow animation */
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px var(--neon-pink); }
+            50% { text-shadow: 0 0 15px var(--neon-pink); }
+            100% { text-shadow: 0 0 5px var(--neon-pink); }
+        }
+
+        .glow {
+            animation: glow 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-js"></canvas>
+
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="https://galaxsus.com/themes/default/assets/img/logo.png" alt="GalaxsUS პლატფორმა">
+            </div>
+            <h2 class="glow">GalaxsUS</h2>
+            <h3>GalaxsUS: სერვისების მიწოდებისა და დასაქმების კომუნიკაციის რევოლუცია</h3>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-block">
+            <p><strong>GalaxsUS</strong> არის თანამედროვე, მომხმარებელზე ორიენტირებული პლატფორმა, რომელიც აკავშირებს სერვისების მაძიებელ პირებს სხვადასხვა სფეროს კვალიფიციურ სპეციალისტებთან.</p>
+            <p>ჩვენ შევქმენით "<strong>GalaxsUS</strong>" პლატფორმა, რომელიც ხელს უწყობს სერვისების მიმწოდებლების სიმბიოტურ კავშირს, იქნება ეს ერთჯერადი დავალებები თუ გრძელვადიანი თანამშრომლობა.</p>
+            <p><strong>GalaxsUS</strong> სპეციალურად არის სტრუქტურირებული ამ კავშირების გასამარტივებლად, რათა ყველა გადახდის შეთანხმება და ტრანზაქცია დამოუკიდებლად მოაგვარონ ჩართულმა მომხმარებლებმა. <span class="emoji">💼</span><span class="emoji">💰</span></p>
+            
+            <!-- Button container added here -->
+            <div class="button-container">
+                <button class="action-button" onclick="window.open('https://galaxsus.com', '_blank')">შემოგვიერთდი ახლავე</button>
+            </div>
+        </section>
+
+        <section class="feature-block">
+            <h4>როგორ მუშაობს კავშირი</h4>
+            <ul>
+                <li><strong>GalaxsUS</strong> საშუალებას აძლევს მომხმარებლებს სწრაფად დაუკავშირდნენ ერთმანეთს რეალურ დროში ტენდერის წინადადებების გარემოში. ეს უწყვეტი პროცესი მათ მყისიერად აკავშირებს, რაც საშუალებას აძლევს გადავიდნენ პირდაპირ პირად გაცვლაზე დამატებითი დეტალებისთვის. <span class="emoji">📞</span><span class="emoji">💬</span></li>
+            </ul>
+        </section>
+
+        <section class="feature-block">
+            <h4>პირადი შეტყობინებები უწყვეტი კომუნიკაციისთვის</h4>
+            <ul>
+                <li>კავშირის დამყარების შემდეგ, მომხმარებლები გადადიან დაცულ ჩატის სივრცეში, სადაც შეუძლიათ განიხილონ სერვისის ყველა დეტალი, როგორიცაა პროექტის სპეციფიკაციები, ვადები და ნებისმიერი საჭირო გადახდის პირობები. <span class="emoji">🗓️</span><span class="emoji">💬</span></li>
+            </ul>
+        </section>
+
+        <aside>
+            <em>მნიშვნელოვანია აღინიშნოს, რომ <strong>GalaxsUS</strong> პლატფორმაში ფინანსური ტრანზაქციები არ ხდება, რადგან მომხმარებლები ამ შეთანხმებებს დამოუკიდებლად აგვარებენ. <span class="emoji">🚫</span><span class="emoji">💳</span></em>
+        </aside>
+
+        <section class="feature-block">
+            <h4>ორმაგი როლის შესაძლებლობა</h4>
+            <ul>
+                <li>მომხმარებლებს შეუძლიათ მარტივად შეცვალონ როლი <strong>GalaxsUS</strong>-ზე სერვისების მაძიებლებიდან მიმწოდებლებად. ეს ორმაგი როლის ფუნქცია ზრდის მრავალფეროვნებას და ხელს უწყობს სერვისების გაზიარების უფრო ინტერაქტიულ საზოგადოებას. <span class="emoji">🌍</span><span class="emoji">🤝</span></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>საკონტაქტო ინფორმაცია:</strong> <a href="mailto:Support@GalaxsUS.Com">Support@GalaxsUS.Com</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js initialization with neon pink theme
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 60,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#FF10F0"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#FF10F0",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1.5,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "repulse"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "repulse": {
+                            "distance": 100,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+        });
+    </script>
+</body>
+</html>
